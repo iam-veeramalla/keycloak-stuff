@@ -38,12 +38,12 @@ docker push  upshift.mirror-registry.qe.devcluster.openshift.com:5000/rhsso
 oc -n openshift import-image rh-sso-7/sso74-openshift-rhel8:7.4 --from=upshift.mirror-registry.qe.devcluster.openshift.com:5000/rhsso --confirm
 ```
 
-## Create a new project where you want to Run Red Hat Single Sign On service:
+## Create a new project
 ```
 oc new-project keycloak
 ```
 
-## Add the view role to the default service account.
+Add the view role to the default service account.
 ```
 oc policy add-role-to-user view system:serviceaccount:$(oc project -q):default
 ```
@@ -54,7 +54,6 @@ oc policy add-role-to-user view system:serviceaccount:$(oc project -q):default
 oc get templates -n openshift -o name | grep -o 'sso74.\+'
 ```
 
-## Deploy the required template.
 > Output of this command provides all the important details like credentials.
 ```
 oc new-app --template=sso74-ocp4-x509-https
