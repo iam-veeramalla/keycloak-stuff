@@ -70,9 +70,9 @@ oc get routes
 
 The imported realm needs to be updated with argo-cd base url/argo-cd route url in the client configuration. Also, update the openshift base url in the Identity Provider section. By default, these feilds are set to some dummy place holders in the realm-export.json file.
 
-<Screenshots to be added for reference>
+![rhsso_client](config/rhsso_client.png)
 
-
+![OpenShiftIdP](config/OpenShiftv4IdP.png)
 
 ## Configure OpenShift GitOps for **Red Hat Single Sign On** using OpenShift v4 IdP. 
 Go to **Clients** -> Click on **argocd** -> Move to **Credentials** tab, Copy the Secret into the argocd-secret.
@@ -134,7 +134,8 @@ You should be able to successfully login into OpenShift Gitops using your OpenSh
 2. Make sure ArgoCDAdmins group has required permissions in the argocd-rbac configmap. 
 
 ## Add the user to ArgoCDAdmins
-<Screenshot Pending>
+
+![addusertoadmin](config/addusertoadmin.png)
 
 ## Update argo-cd RBAC
 > kubectl edit configmap argocd-rbac-cm -n openshift-gitops
