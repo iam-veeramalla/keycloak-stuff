@@ -1,5 +1,5 @@
 # Red Hat Single Sign On Installation
-This Document descibes the steps to install RH-SSO on OCP, OSD or Disconnected Cluster using OpenShift templates.
+This Document descibes the steps to install RH-SSO on OCP, OSD or Disconnected Cluster using OpenShift templates and enable SSO for OpenShift Gitops.
 
 # Inspiration
 https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.4/html/red_hat_single_sign-on_for_openshift_on_openjdk/get_started
