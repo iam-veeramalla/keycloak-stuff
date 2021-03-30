@@ -4,13 +4,13 @@ This Document descibes the steps to install RH-SSO on OCP, OSD or Disconnected C
 # Inspiration
 https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.4/html/red_hat_single_sign-on_for_openshift_on_openjdk/get_started
 
-# Login as admin
+## Login as admin
 Some of the below commamds need admin privilege. Either Login as admin or login as a user with admin privilege.
 ```
 oc login -u kubeadmin -p password 
 ```
 
-# Update the core set of Red Hat Single Sign-On 7.4.6.GA resources for OpenShift in the openshift project
+## Update the core set of Red Hat Single Sign-On 7.4.6.GA resources
 ```
 for resource in sso74-image-stream.json \
   sso74-https.json \
@@ -24,7 +24,7 @@ do
 done
 ```
 
-# Install the Red Hat Single Sign-On 7.4.6.GA OpenShift image streams in the openshift project:
+## Install the Red Hat Single Sign-On Image streams:
 > Run below command if you are using either OpenShift Container Platform or OpenShift Dedicated. This will fail on a Disconnected/air-gapped/proxy cluster.
 ```
 oc -n openshift import-image rh-sso-7/sso74-openshift-rhel8:7.4 --from=registry.redhat.io/rh-sso-7/sso74-openshift-rhel8:7.4 --confirm
@@ -38,23 +38,23 @@ docker push  upshift.mirror-registry.qe.devcluster.openshift.com:5000/rhsso
 oc -n openshift import-image rh-sso-7/sso74-openshift-rhel8:7.4 --from=upshift.mirror-registry.qe.devcluster.openshift.com:5000/rhsso --confirm
 ```
 
-# Create a new project where you want to Run Red Hat Single Sign On service:
+## Create a new project where you want to Run Red Hat Single Sign On service:
 ```
 oc new-project keycloak
 ```
 
-# Add the view role to the default service account.
+## Add the view role to the default service account.
 ```
 oc policy add-role-to-user view system:serviceaccount:$(oc project -q):default
 ```
 
-# Deploying the Template using OpenShift CLI
+## Deploying the Template using OpenShift CLI
 > List the available Red Hat Single Sign-On application templates:
 ```
 oc get templates -n openshift -o name | grep -o 'sso74.\+'
 ```
 
-# Deploy the required template.
+## Deploy the required template.
 > Output of this command provides all the important details like credentials.
 ```
 oc new-app --template=sso74-ocp4-x509-https
@@ -75,7 +75,7 @@ The imported realm needs to be updated with argo-cd base url/argo-cd route url i
 
 
 
-# Configure OpenShift GitOps for **Red Hat Single Sign On** using OpenShift v4 IdP. 
+## Configure OpenShift GitOps for **Red Hat Single Sign On** using OpenShift v4 IdP. 
 Go to **Clients** -> Click on **argocd** -> Move to **Credentials** tab, Copy the Secret into the argocd-secret.
 > echo -n '<secret>' | base64
 > echo -n '83083958-8ec6-47b0-a411-a8c55381fbd2' | base64
@@ -134,10 +134,10 @@ You should be able to successfully login into OpenShift Gitops using your OpenSh
 1. Add the user to ArgoCDAdmins RH-SSO group created by realm export. 
 2. Make sure ArgoCDAdmins group has required permissions in the argocd-rbac configmap. 
 
-# Add the user to ArgoCDAdmins
+## Add the user to ArgoCDAdmins
 <Screenshot Pending>
 
-# Update argo-cd RBAC
+## Update argo-cd RBAC
 > kubectl edit configmap argocd-rbac-cm -n openshift-gitops
 
 ```
