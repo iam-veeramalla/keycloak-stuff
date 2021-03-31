@@ -67,8 +67,8 @@ oc new-app --template=sso74-ocp4-x509-https
 oc get routes
 ```
 
-Download **realm-export.json** file from [here](https://raw.githubusercontent.com/iam-veeramalla/RH-SSO-Installation/main/realm-export.json)
-**Click on Create New Realm** 
+Download **realm-export.json** file from [here](https://raw.githubusercontent.com/iam-veeramalla/RH-SSO-Installation/main/realm-export.json). By default you will be logged into master realm. It is recommended to create a new realm for your changes. 
+**Click on Add realm** from the Drop Down. 
 > *Select Import and Import the realm-export.json*
 
 ![newrealm](config/newrealm.png)
