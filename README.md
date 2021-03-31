@@ -10,26 +10,6 @@ Some of the below commamds need admin privilege. Either Login as admin or login 
 oc login -u kubeadmin -p password 
 ```
 
-## Update the core set of Red Hat Single Sign-On 7.4.6.GA resources
-```
-for resource in sso74-image-stream.json \
-  sso74-https.json \
-  sso74-postgresql.json \
-  sso74-postgresql-persistent.json \
-  sso74-ocp4-x509-https.json \
-  sso74-ocp4-x509-postgresql-persistent.json
-do
-  oc -n openshift replace -f \
-  https://raw.githubusercontent.com/jboss-container-images/redhat-sso-7-openshift-image/sso74-dev/templates/${resource}
-done
-```
-
-## Install the Red Hat Single Sign-On Image streams:
-> Run below command if you are using either OpenShift Container Platform or OpenShift Dedicated. This will fail on a Disconnected/air-gapped/proxy cluster.
-```
-oc -n openshift import-image rh-sso-7/sso74-openshift-rhel8:7.4 --from=registry.redhat.io/rh-sso-7/sso74-openshift-rhel8:7.4 --confirm
-```
-
 > Run below command only if you are using a Disconnected/air-gapped/proxy cluster. NOT REQUIRED FOR OCP or OSD.
 ```
 docker pull registry.redhat.io/rh-sso-7/sso74-openshift-rhel8:7.4
@@ -169,3 +149,25 @@ data:
 ```
 
 Please refer to the ArgoCD Rbac documentation [here](https://argoproj.github.io/argo-cd/operator-manual/rbac) 
+
+
+# Additional Information
+## Update the core set of Red Hat Single Sign-On 7.4.6.GA resources
+```
+for resource in sso74-image-stream.json \
+  sso74-https.json \
+  sso74-postgresql.json \
+  sso74-postgresql-persistent.json \
+  sso74-ocp4-x509-https.json \
+  sso74-ocp4-x509-postgresql-persistent.json
+do
+  oc -n openshift replace -f \
+  https://raw.githubusercontent.com/jboss-container-images/redhat-sso-7-openshift-image/sso74-dev/templates/${resource}
+done
+```
+
+## Install the Updated Red Hat Single Sign-On Image streams:
+> Run below command if you are using either OpenShift Container Platform or OpenShift Dedicated. This will fail on a Disconnected/air-gapped/proxy cluster.
+```
+oc -n openshift import-image rh-sso-7/sso74-openshift-rhel8:7.4 --from=registry.redhat.io/rh-sso-7/sso74-openshift-rhel8:7.4 --confirm
+```
