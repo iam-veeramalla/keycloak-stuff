@@ -76,6 +76,16 @@ Download **realm-export.json** file from [here](https://raw.githubusercontent.co
 
 The imported realm needs to be updated with argo-cd base url/argo-cd route url in the client configuration. Also, update the openshift base url in the Identity Provider section. By default, these feilds are set to some dummy place holders in the realm-export.json file.
 
+Navigate to **Clients**. Seach for client with name **argocd**. 
+
+Update argocd hostname in the below feilds. You would have noticed that **realm-export.json** file sets *argocd-route-hostname* as a place-holder for hostname in these feilds.
+1. Root URL
+2. Valid Redirect URIs
+3. Admin URL
+4. Web Origins
+
+> You would have noticed that **realm-export.json** file sets **argocd-route-hostname** as a place-holder for hostname in this feilds.
+
 ![rhsso_client](config/rhsso_client.png)
 
 ![OpenShiftIdP](config/OpenShiftv4IdP.png)
