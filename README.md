@@ -73,6 +73,8 @@ Download **realm-export.json** file from [here](https://raw.githubusercontent.co
 
 ![newrealm](config/newrealm.png)
 
+Get the argo-cd route url from console.
+![argocd_route](config/newrealm.png)
 
 The imported realm needs to be updated with argo-cd base url/argo-cd route url in the client configuration. Also, update the openshift base url in the Identity Provider section. By default, these feilds are set to some dummy place holders in the realm-export.json file.
 
