@@ -94,8 +94,7 @@ Update argocd hostname in the below feilds. You would have noticed that **realm-
 
 ## Configure OpenShift GitOps for **Red Hat Single Sign On** using OpenShift v4 IdP. 
 Go to **Clients** -> Click on **argocd** -> Move to **Credentials** tab, Copy the Secret into the argocd-secret.
-> echo -n '<secret>' | base64
-> echo -n '83083958-8ec6-47b0-a411-a8c55381fbd2' | base64
+> echo -n 'secret' | base64
 
 **Edit the argocd-secret**
 > oc edit secret argocd-secret -n openshift-gitops
@@ -116,14 +115,14 @@ data:
 ```
 oidcConfig: |
   name: Keycloak
-  issuer: https://keycloak.example.com/auth/realms/myrealm
+  issuer: https://keycloak.example.com/auth/realms/openshift-gitops
   clientID: argocd
   clientSecret: $oidc.keycloak.clientSecret
   requestedScopes: ["openid", "profile", "email", "groups"]
 
 ```
 
-**Note: ** Update issuer in the above section with your keycloak hostname. Keycloak hostname can be obtained from route in keycloak namespace.
+**Note: ** Update issuer in the above section with your keycloak hostname.
 
 # Registering an OAuth Client 
 ```
@@ -133,7 +132,7 @@ metadata:
  name: keycloak-broker 
 secret: "12345"
 redirectURIs:
-- "https://<keycloakhostname>/auth/realms/myrealm/broker/openshift-v4/endpoint" 
+- "https://<keycloakhostname>/auth/realms/openshift-gitops/broker/openshift-v4/endpoint" 
 grantMethod: prompt 
 ```
 
