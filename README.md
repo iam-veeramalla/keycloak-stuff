@@ -58,6 +58,8 @@ oc get templates -n openshift -o name | grep -o 'sso74.\+'
 ```
 oc new-app --template=sso74-ocp4-x509-https
 ```
+![rhsso_login_details](config/rh-sso_login_details.png)
+
 
 # Set up Red Hat Single Sign On
 > Login to RH-SSO, Get User-ID and Password from above command output.
@@ -65,8 +67,12 @@ oc new-app --template=sso74-ocp4-x509-https
 oc get routes
 ```
 
+Download **realm-export.json** file from [here](https://raw.githubusercontent.com/iam-veeramalla/RH-SSO-Installation/main/realm-export.json)
 **Click on Create New Realm** 
-> *Select Import and Import the realm-export.json from this repo.*
+> *Select Import and Import the realm-export.json*
+
+![newrealm](config/newrealm.png)
+
 
 The imported realm needs to be updated with argo-cd base url/argo-cd route url in the client configuration. Also, update the openshift base url in the Identity Provider section. By default, these feilds are set to some dummy place holders in the realm-export.json file.
 
