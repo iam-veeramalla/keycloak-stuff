@@ -1,0 +1,71 @@
+{
+    "realm": "argocd",
+    "enabled": true,
+    "sslRequired": "external",
+    "groups": [
+      {
+        "name": "ArgoCDAdmins",
+        "path": "/ArgoCDAdmins"
+      }
+    ],
+    "requiredCredentials": [
+      "password"
+    ],
+    "clients": [
+      {
+        "clientId": "argocd",
+        "name": "argocd",
+        "rootUrl": "https://argocd-route-hostname",
+        "adminUrl": "https://argocd-route-hostname",
+        "clientAuthenticatorType": "client-secret",
+        "secret": "admin",
+        "redirectUris": [
+          "https://argocd-route-hostname/auth/callback"
+        ],
+        "webOrigins": [
+          "https://argocd-route-hostname"
+        ],
+        "defaultClientScopes": [
+          "web-origins",
+          "role_list",
+          "roles",
+          "profile",
+          "groups",
+          "email"
+        ]
+      }
+    ],
+    "clientScopes": [
+      {
+        "name": "groups",
+        "protocol": "openid-connect",
+        "protocolMappers": [
+          {
+            "name": "groups",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-group-membership-mapper",
+            "config": {
+              "full.path": "false",
+              "id.token.claim": "true",
+              "access.token.claim": "true",
+              "claim.name": "groups",
+              "userinfo.token.claim": "true"
+            }
+          }
+        ]
+      }
+    ],
+    "identityProviders": [
+      {
+        "alias": "openshift-v4",
+        "displayName": "Login with Openshift",
+        "providerId": "openshift-v4",
+        "config": {
+          "baseUrl": "https://openshift-base-url:6443",
+          "clientSecret": "admin",
+          "clientId": "keycloak-broker",
+          "defaultScope": "user:full"
+        }
+      }
+    ]
+}
