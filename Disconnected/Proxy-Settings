@@ -1,0 +1,11 @@
+oc exec -it dc/keycloak -n openshift-gitops -- /bin/bash
+
+[I have no name!@keycloak-1-tlq9k ~]$ /opt/eap/bin/jboss-cli.sh
+
+[disconnected /] embed-server --server-config=standalone-openshift.xml
+
+/subsystem=keycloak-server/spi=connectionsHttpClient/provider=default:write-attribute(name=properties.proxy-mappings,value=["oauth-openshift.apps.aroutd7.qe.devcluster.openshift.com;http://ec2-3-142-156-195.us-east-2.compute.amazonaws.com:3128"])
+
+/subsystem=keycloak-server/spi=connectionsHttpClient/provider=default:write-attribute(name=properties.disable-trust-manager,value=true)
+
+/opt/eap/bin/jboss-cli.sh --connect --command=:reload
